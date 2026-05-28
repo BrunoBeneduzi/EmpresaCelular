@@ -1,0 +1,31 @@
+import { ClienteCadastroDto } from "../cliente/adapters/mappers/ClienteCadastroDto";
+import { AssinaturaCadastroDto } from "../assinatura/adapters/mappers/AssinaturaCadastroDto";
+import { AlteraInfPlanoDto } from "../plano/adapters/mappers/AlterarInfPlanoDto";
+import { AssinaturaRetornaClienteDto } from "../assinatura/adapters/mappers/AssinaturaRetornaClienteDto";
+import type { IListaCliente } from "../cliente/application/ports/input/IListaCliente";
+import type { ICadastraCliente } from "../cliente/application/ports/input/ICadastraCliente";
+import type { IEditaCliente } from "../cliente/application/ports/input/IEditaCliente";
+import type { IListaPlano } from "../plano/application/ports/input/IListaPlano";
+import type { ICadastraAssinatura } from "../assinatura/application/ports/input/ICadastraAssinatura";
+import type { IRetornaAssinatura } from "../assinatura/application/ports/input/IRetornaAssinatura";
+import type { IEditaPlano } from "../plano/application/ports/input/IEditaPlano";
+export declare class ServicoGestao {
+    private listar;
+    private cadastrar;
+    private editar;
+    private listarPlan;
+    private editaPlan;
+    private cadastraAss;
+    private listarAss;
+    constructor(listar: IListaCliente, cadastrar: ICadastraCliente, editar: IEditaCliente, listarPlan: IListaPlano, editaPlan: IEditaPlano, cadastraAss: ICadastraAssinatura, listarAss: IRetornaAssinatura);
+    cadastraCliente(dto: ClienteCadastroDto): Promise<import("../cliente/domain/ClienteDomain").ClienteDomain | undefined>;
+    listarClientes(): Promise<import("../cliente/domain/ClienteDomain").ClienteDomain[]>;
+    listarCliente(id: number): Promise<import("../cliente/domain/ClienteDomain").ClienteDomain | undefined>;
+    listarPlanos(): Promise<import("../plano/domain/PlanoDomain").PlanoDomain[]>;
+    listarPlano(id: number): Promise<void>;
+    cadastraAssinatura(dto: AssinaturaCadastroDto): Promise<AssinaturaCadastroDto | undefined>;
+    alteraCustoMensal(id: number, dto: AlteraInfPlanoDto): Promise<void>;
+    retornaTipoAssinatura(tipo: string): Promise<void>;
+    retornaAssinaturaCliente(codcli: number): Promise<AssinaturaRetornaClienteDto[]>;
+    retornaAssinaturasPlanos(codplano: number): void;
+}
